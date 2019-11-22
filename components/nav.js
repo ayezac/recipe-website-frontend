@@ -1,13 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 
-const links = [
-  { href: 'https://zeit.co/now', label: 'ZEIT' },
-  { href: 'https://github.com/zeit/next.js', label: 'GitHub' },
-].map(link => {
-  link.key = `nav-link-${link.href}-${link.label}`
-  return link
-})
 
 const Nav = () => (
   <nav>
@@ -16,12 +9,13 @@ const Nav = () => (
         <Link href="/">
           <a>Home</a>
         </Link>
+        <Link href="/recipes">
+          <a>Recipes</a>
+        </Link>
+        <Link href="/contact">
+          <a>Contact</a>
+        </Link>
       </li>
-      {links.map(({ key, href, label }) => (
-        <li key={key}>
-          <a href={href}>{label}</a>
-        </li>
-      ))}
     </ul>
 
     <style jsx>{`
@@ -31,11 +25,14 @@ const Nav = () => (
           Helvetica, sans-serif;
       }
       nav {
-        text-align: center;
+        width: 100%;
+        background-color: #3C5580;
       }
       ul {
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
+        align-items: center;
       }
       nav > ul {
         padding: 4px 16px;
@@ -43,11 +40,14 @@ const Nav = () => (
       li {
         display: flex;
         padding: 6px 8px;
+        
       }
       a {
-        color: #067df7;
+        color: white;
         text-decoration: none;
-        font-size: 13px;
+        font-size: 22px;
+        margin-right: 10vw;
+        text-align: center;
       }
     `}</style>
   </nav>
