@@ -1,67 +1,66 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+import React from 'react';
+import Link from 'next/link';
+import Head from 'next/head';
 
 const Poll = (props) => {
-    const [choiceChosen, setChoiceChosen] = useState("")
 
-    const handleInputChange =(e) => {
-      setChoiceChosen(e.target.value)
-    }
     return (
-    <div>
-        <h1>Recipe Poll</h1>
-    <form>
-        <ul>
-          {props.polls.map(poll => 
-            <li className="questions" key={poll.id}>{poll.question_text}
-            <div>
-            {poll.choices.map(choice =>
-            <div className="choices">
-            <label>
-             <input
-                type="radio"
-                name="choices"
-                value={choice.id}
-                onChange={handleInputChange}/> 
-            
-                {choice.choice_text}
-            </label>
-            </div>
-                )}
-            </div>
-            </li>
-            )}
-          
-        </ul>
-        <button>Submit</button>
-    </form>
+        <React.Fragment>
+            <Head>
+                <link 
+                    href="https://fonts.googleapis.com/css?family=Alata|Open+Sans&display=swap" 
+                    rel="stylesheet" />
+                <link
+                    rel="stylesheet"
+                    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+                    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+                    crossOrigin="anonymous"
+                />
+            </Head>
+            <main id="container">
+                <h1>Poll</h1>
+                <form>
+                    <ul className="list-group">
+                        {props.polls.map(poll =>
+                            <li className="questions list-group-item" key={poll.id}>
+                                <Link
+                                    href={`/choices/[id]`}
+                                    as={`/choices/${poll.id}`}>
+                                    <a className="display-5">{poll.question_text}</a>
+                                </Link>
+                            </li>
+                        )}
+                    </ul>
+                </form>
 
-    <style jsx>{`
+                <style jsx>{`
+   #container{
+        width:90%;
+        margin: auto;
+    }
     h1 {
         background-color: #3C5580;
         color: white;
         font-size: 1.8rem;
         text-align: center;
         padding: 20px;
-    }
-    form{
-        
-
+        font-family: 'Alata', sans-serif;
     }
     .questions{
         list-style: none;
-        text-align: left;
+        text-align: center;
         font-size: 1.5rem;
         margin-bottom: 30px;
         border-bottom: 2px solid #3C5580;
         padding-bottom: 40px;
+        font-family: 'Open Sans', sans-serif;
 
     }
-    .choices{
-        position: relative;
-        left: 30px;
-        font-size: 1.3rem;
-    }
+   li a{
+       text-decoration: none;
+       color:#3C5580;
+       font-size: 1.1rem;
+   }
     input[type="radio"] {
         width: 1.5rem;
         height: 1.5rem;
@@ -69,19 +68,11 @@ const Poll = (props) => {
         top:3px;
         right: 15px;
       }
-      button{
-          width: 20%;;
-          height: 40px;
-          text-align: center;
-          position: relative;
-          left: 40%;
-          color: white;
-          background-color: #3C5580;
-      }
 
     `}</style>
-    </div>
-)
+            </main>
+        </React.Fragment>
+    )
 
 }
 

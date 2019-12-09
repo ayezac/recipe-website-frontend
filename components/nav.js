@@ -1,56 +1,109 @@
-import React from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import Link from 'next/link'
+import Head from 'next/head';
+import RecipeList from './RecipeDropdown';
+import useOnClickOutside from './useOnClickOutside';
+// import {LoginContext} from './LoginContext';
+import Cookies from 'js-cookie';
+import Router from 'next/router';
 
+const Nav = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false)
+  
+  // Call hook passing in the ref and a function to call on outside click
+  const recipeModuleRef = useRef();  
 
-const Nav = () => (
-  <nav>
-    <ul>
-      <li>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-        <Link href="/recipes">
-          <a>Recipes</a>
-        </Link>
-        <Link href="/contact">
-          <a>Contact</a>
-        </Link>
-      </li>
-    </ul>
+  const handleLogout = (e) => {
+    e.preventDefault()
+    Cookies.remove('token')
+    Cookies.remove('username')
+    Router.push({pathname:'/'})
+  }
 
-    <style jsx>{`
-      :global(body) {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir,
-          Helvetica, sans-serif;
-      }
+  useOnClickOutside(recipeModuleRef, () => setModalOpen(false));
+  const token = Cookies.get('token')
+  const username = Cookies.get('username')
+
+  return (
+    <>
+    <nav>
+      <Head>
+        <link href="https://fonts.googleapis.com/css?family=Alata&display=swap" rel="stylesheet" />
+      </Head>
+      <ul>
+          <Link href="/">
+            <a>Home</a>
+          </Link>
+          <button onClick={()=>setModalOpen(true)}>Recipes</button>
+   
+          {!token &&
+          <span>
+            <Link href='/login'>
+              <a>Login/</a>
+            </Link>
+              <Link href="/signup">
+              <a>Sign Up</a>
+            </Link>
+          </span>
+          } 
+          {token &&
+           <>
+            <button onClick={handleLogout}>Logout</button>
+            <Link href="/profile">
+              <a>{username}</a>
+            </Link>
+          </>
+          }  
+        
+      </ul>
+      </nav>
+      {isModalOpen &&
+          <RecipeList ref={recipeModuleRef}  />}
+     
+      <style jsx>{`
       nav {
         width: 100%;
-        background-color: #3C5580;
+        font-family: 'Alata', sans-serif;
+        height: 50px;
+
       }
       ul {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
+        list-style: none;
+        padding: 15px;
+        width: 98%;
+        margin: auto;
       }
-      nav > ul {
-        padding: 4px 16px;
-      }
-      li {
-        display: flex;
-        padding: 6px 8px;
-        
-      }
+
       a {
-        color: white;
+        color: #3C5580;
         text-decoration: none;
-        font-size: 22px;
-        margin-right: 10vw;
+        font-size: 16px;
         text-align: center;
       }
+      a:hover{
+        text-decoration: underline;
+      }
+      button:hover{
+        text-decoration: underline;
+      }
+
+      button{
+        color: #3C5580;
+        text-decoration: none;
+        font-size: 16px;
+        text-align: center;
+        background: white;
+        font-family: 'Alata', sans-serif;
+        border: none;
+        cursor: pointer;
+      }
     `}</style>
-  </nav>
-)
+  </>
+  )};
 
 export default Nav

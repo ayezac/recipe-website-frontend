@@ -1,21 +1,32 @@
 import React from 'react';
-import Head from 'next/head';
 import Layout from '../components/Layout';
 import Poll from '../components/Poll';
 import axios from 'axios';
+import Head from 'next/head'
+import {baseUrl} from '../components/Services';
 
-const Home = (props) => (
+const Home = (props) => {
+
+  return(
   <Layout>
+    <Head>
+      <title>Home</title>
+      <link href="https://fonts.googleapis.com/css?family=Alata|Open+Sans&display=swap" rel="stylesheet"></link>
+    </Head>
+    <main>
     <header>
       <h1>RECIPES</h1>
     </header>
-    <main>
-        <section className="main">
         <h1>Explore Our Recipes</h1>
+        <div className="main">
         <figure>
-            <img src="/main-food-image.jpg" alt="A meal"/>
+            <img src="/main-food-image.jpg" alt="A meal" className="img-thumbnail"/>
             <figcaption>Photo by Alex Munsell on Unsplash</figcaption>
         </figure>
+        <section className="poll">
+          <Poll polls={props.polls}/>  
+        </section>
+        </div>
         <section className="text">
           <h3>About</h3>
           <p>Lorem ipsum dolor sit amet, 
@@ -33,80 +44,85 @@ const Home = (props) => (
             explicabo perferendis quos provident delectus ducimus necessitatibus reiciendis 
             optio tempora unde earum doloremque commodi laudantium ad nulla vel odio?</p>    
         </section>
-        </section>
-        <section className="poll">
-          <Poll polls={props.polls}/>  
-        </section>
     </main>
-    <footer>&copy; 2019</footer> 
 
     <style jsx>{`
     header {
-        font-family:  'Raleway', sans-serif;
+      font-family: 'Alata', sans-serif;
         text-align: center;
         color: #3C5580;
         font-size: 2rem;
         margin: 20px;
     }
-    main {
-      display: flex;
-      flex-direction: row;
+    main{
+      width: 95vw;
+      margin: auto;
     }
 
     main h1{
         color: #3C5580;
         text-align: center;
         font-size: 2.5rem;
+        font-family: 'Alata', sans-serif;
     }
      .main{
-       width: 60vw;
+       display: flex;
+       flex-direction: row;
+       justify-content: center;
+       align-items: center;
+       width: 100%;
      }
     figcaption{
       text-align: center;
     }
     figure {
-      width: 810px;
+      width: 90vw;
       margin: auto;
     }
-    figure img {
-        width: 800px;
-        height: 530px;
-    }
+
     .text h3{
         font-size: 2rem;
         text-align: center;
+        font-family: 'Alata', sans-serif;
     }
-    .text{
-      font-size: 1.3rem;
+    .text p{
+      font-size: 1rem;
+      font-family: 'Open Sans', sans-serif;
     }
     .poll{
       border: 1px solid #3C5580;
       margin: 20px;
       padding: 10px;
-      width: 28vw;
-      position:relative;
-      top: 10px;
-      height: 80%;
+      width:50%;
+      height: 90%;
 
     }
     
-    footer{
-        background-color: #3C5580;
-        height: 30px;
-        width: 100%;
-        color: #fff;
-        padding: 10px;
+    @media only screen and (max-width: 1400px){
+      .main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+      }
+      main h1{
+        font-size: 2rem;
+      }
+      .text p{
+        0.7rem;
+      }
+
     }
     `}</style>
   </Layout>
-);
+)};
 
 Home.getInitialProps = async function(props) {
-  const result = await axios.get('http://yoshi.willandskill.eu:8555/polls/questions/');
-  const data = await result.data;
-  console.log(`Show data fetched. ${data}`)
+  const result = await axios.get(`${baseUrl}polls/questions/`);
+  const pollData = await result.data;
   return {
-      polls:data.slice(0,4)
+      polls:pollData,
   }
 }
 
