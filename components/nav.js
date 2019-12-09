@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useRef} from 'react'
 import Link from 'next/link'
 import Head from 'next/head';
 import RecipeList from './RecipeDropdown';
