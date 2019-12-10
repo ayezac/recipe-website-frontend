@@ -35,8 +35,11 @@ const Nav = () => {
           <Link href="/">
             <a>Home</a>
           </Link>
+          <div className="recipe-button">
           <button onClick={()=>setModalOpen(true)}>Recipes</button>
-   
+          {isModalOpen &&
+          <RecipeList ref={recipeModuleRef}  />}
+          </div>
           {!token &&
           <span>
             <Link href='/login'>
@@ -48,18 +51,18 @@ const Nav = () => {
           </span>
           } 
           {token &&
-           <>
-            <button onClick={handleLogout}>Logout</button>
+           <span>
             <Link href="/profile">
               <a>{username}</a>
             </Link>
-          </>
+            <button onClick={handleLogout}>Logout</button>
+          </span>
           }  
-        
+    
       </ul>
       </nav>
-      {isModalOpen &&
-          <RecipeList ref={recipeModuleRef}  />}
+    
+  
      
       <style jsx>{`
       nav {
@@ -72,7 +75,7 @@ const Nav = () => {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        align-items: center;
+        align-items: flex-start;
         list-style: none;
         padding: 15px;
         width: 98%;
@@ -102,6 +105,7 @@ const Nav = () => {
         border: none;
         cursor: pointer;
       }
+   
     `}</style>
   </>
   )};

@@ -40,7 +40,7 @@ const RecipeForm = () => {
         const data ={
             "title": title,
             "ingredients": ingredientList,
-            "method": method
+            "method": method,
         }
         const headers = {
             'Content-Type': 'application/json',

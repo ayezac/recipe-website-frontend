@@ -17,12 +17,11 @@ const RecipeList = React.forwardRef((props,ref) => {
             </div>
             <style jsx>{`
                 .recipe-dropdown{
-                    position: absolute;
-                    left: 45%;
+                    position: relative;
                     top: 7%;
                     background-color:#3C5580;
                     padding: 10px;
-                    z-index: 1;
+                    // z-index: 1;
                     display: flex;
                     flex-direction: column;
 

@@ -1,15 +1,17 @@
-import React, { useState, createContext } from 'react';
+import React, { useState } from 'react';
 import Login from './Login'
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import Router from 'next/router';
 import {baseUrl} from './Services';
+import LoginError from './LoginErrorMessage';
 
 
 
-const LoginProvider = (props) => {
+const LoginContainer = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState(false)
 
     const handleNameChange = (e) =>{
         setUsername(e.target.value)
@@ -32,7 +34,6 @@ const LoginProvider = (props) => {
         {headers}
         )
         if(res.status ===200){
-            console.log(res)
             Cookies.set("token", res.data.token)
             Cookies.set("username", res.data.username)
             Cookies.set("id", res.data.id)
@@ -43,6 +44,8 @@ const LoginProvider = (props) => {
         }
         catch(error){
             console.log(error)
+            setError(true)
+
         }
 
     }
@@ -53,8 +56,11 @@ const LoginProvider = (props) => {
                 handlePasswordChange = {handlePasswordChange}
                 handleLogin={handleLogin}
             />
+            {error &&
+            <LoginError/>
+            }
         </React.Fragment>
     )
 }
 
-export default LoginProvider;
+export default LoginContainer;
