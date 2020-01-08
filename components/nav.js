@@ -2,26 +2,21 @@ import React, { useState, useRef} from 'react'
 import Link from 'next/link'
 import Head from 'next/head';
 import RecipeList from './RecipeDropdown';
+import ProfileDropdown from './ProfileDropdown';
 import useOnClickOutside from './useOnClickOutside';
-// import {LoginContext} from './LoginContext';
 import Cookies from 'js-cookie';
-import Router from 'next/router';
+
 
 const Nav = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [profileDropdown, setProfileDropdown] = useState(false)
   
   // Call hook passing in the ref and a function to call on outside click
   const recipeModuleRef = useRef();  
-
-  const handleLogout = (e) => {
-    e.preventDefault()
-    Cookies.remove('token')
-    Cookies.remove('username')
-    Router.push({pathname:'/'})
-  }
+  const profileModuleRef = useRef();
 
   useOnClickOutside(recipeModuleRef, () => setModalOpen(false));
+  useOnClickOutside(profileModuleRef, () => setProfileDropdown(false));
   const token = Cookies.get('token')
   const username = Cookies.get('username')
 
@@ -35,7 +30,7 @@ const Nav = () => {
           <Link href="/">
             <a>Home</a>
           </Link>
-          <div className="recipe-button">
+          <div>
           <button onClick={()=>setModalOpen(true)}>Recipes</button>
           {isModalOpen &&
           <RecipeList ref={recipeModuleRef}  />}
@@ -50,14 +45,14 @@ const Nav = () => {
             </Link>
           </span>
           } 
+          <div>
           {token &&
-           <span>
-            <Link href="/profile">
-              <a>{username}</a>
-            </Link>
-            <button onClick={handleLogout}>Logout</button>
-          </span>
+           <button onClick={()=>setProfileDropdown(true)}>{username}</button>
           }  
+          {profileDropdown &&
+          <ProfileDropdown ref={profileModuleRef} />
+          }
+          </div>
     
       </ul>
       </nav>
@@ -69,7 +64,7 @@ const Nav = () => {
         width: 100%;
         font-family: 'Alata', sans-serif;
         height: 50px;
-
+        border-bottom: 1px solid  #e00472;
       }
       ul {
         display: flex;
@@ -83,20 +78,22 @@ const Nav = () => {
       }
 
       a {
-        color: #3C5580;
+        color: black;
         text-decoration: none;
         font-size: 16px;
         text-align: center;
       }
       a:hover{
         text-decoration: underline;
+        color: #e00472;
       }
       button:hover{
         text-decoration: underline;
+        color: #e00472;
       }
 
       button{
-        color: #3C5580;
+        color:black;
         text-decoration: none;
         font-size: 16px;
         text-align: center;
