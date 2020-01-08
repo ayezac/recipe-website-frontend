@@ -10,14 +10,15 @@ const Recipes = (props) => {
     return(
         <Layout>
             <Head>
-                <title>Recipe List</title>
+                <title>Recipes</title>
                 <link href="https://fonts.googleapis.com/css?family=Alata|Open+Sans&display=swap" rel="stylesheet"/>
             </Head>
+            
             <header>
-                <h1>Recipe List</h1>
+                <h1>All Recipes</h1>
             </header>
                 <div>
-                   
+                  
                     <ul>
                         {props.recipes.map(recipe => 
                         <li key={recipe.id}>
@@ -35,6 +36,8 @@ const Recipes = (props) => {
                 header{
                     font-family: 'Alata', sans-serif;
                     text-align: center;
+                    color: #fa5091;
+                    text-shadow: -1px 1px #e00472, 0 1px #e00472, 1px 0 #e00472, 0 -1px #e00472;
                 }
                 ul a{
                     font-size: 1.3rem;
@@ -43,7 +46,7 @@ const Recipes = (props) => {
                     padding: 10px;
                 }
                 ul a:hover{
-                    color:#3C5580;
+                    color:#e00472;
                 }
                 ul li{
                     padding: 10px;

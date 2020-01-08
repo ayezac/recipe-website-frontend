@@ -14,19 +14,17 @@ const Home = (props) => {
       <link href="https://fonts.googleapis.com/css?family=Alata|Open+Sans&display=swap" rel="stylesheet"></link>
     </Head>
     <main>
-    <header>
-      <h1>RECIPES</h1>
-    </header>
-        <h1>Explore Our Recipes</h1>
-        <div className="main">
+
+      <div className="main">
+        <header>
+          <h1>MY RECIPE BOOK</h1>
+        </header>
         <figure>
-            <img src="/main-food-image.jpg" alt="A meal" className="img-thumbnail"/>
-            <figcaption>Photo by Alex Munsell on Unsplash</figcaption>
+            <img src="recipe-book.gif" alt="A drawing of a recipe book" />
         </figure>
-        <section className="poll">
-          <Poll polls={props.polls}/>  
-        </section>
+      
         </div>
+        <div className="about-container">
         <section className="text">
           <h3>About</h3>
           <p>Lorem ipsum dolor sit amet, 
@@ -37,83 +35,88 @@ const Home = (props) => {
           <p>Ad dolore dignissimos asperiores dicta facere optio quod commodi nam 
             tempore recusandae. Rerum sed nulla eum vero expedita ex delectus voluptates 
             rem at neque quos facere sequi unde optio aliquam!</p>
-          <p>Tenetur quod quidem in voluptatem corporis dolorum dicta sit pariatur porro 
-            quaerat autem ipsam odit quam beatae tempora quibusdam illum! Modi velit odio nam 
-            nulla unde amet odit pariatur at!</p>
-          <p>Consequatur rerum amet fuga expedita sunt et tempora saepe? Iusto nihil 
-            explicabo perferendis quos provident delectus ducimus necessitatibus reiciendis 
-            optio tempora unde earum doloremque commodi laudantium ad nulla vel odio?</p>    
+          
         </section>
+        <section className="poll">
+          <Poll polls={props.polls}/>  
+        </section>
+        </div>
     </main>
 
     <style jsx>{`
-    header {
+
+    h1{
       font-family: 'Alata', sans-serif;
-        text-align: center;
-        color: #3C5580;
-        font-size: 2rem;
-        margin: 20px;
+      text-align: center;
+      font-size: 4rem;
+      margin: 10px;
+      z-index: 1;
+      color: #fa5091;
+      text-shadow: -1px 5px #e00472, 0 2px #e00472, 1px 0 #e00472, 0 -1px #e00472;
     }
     main{
       width: 95vw;
       margin: auto;
     }
-
-    main h1{
-        color: #3C5580;
-        text-align: center;
-        font-size: 2.5rem;
-        font-family: 'Alata', sans-serif;
-    }
      .main{
        display: flex;
-       flex-direction: row;
+       flex-direction: column;
        justify-content: center;
        align-items: center;
        width: 100%;
      }
-    figcaption{
-      text-align: center;
-    }
+  
     figure {
-      width: 90vw;
       margin: auto;
     }
-
+    img {
+      width: 40vw;
+      margin: auto;
+    }
+    .about-container{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      color: black;
+      border: 1px solid  #db125f;
+    }
+    .text{
+      padding: 10px;
+      width: 40%;
+    }
     .text h3{
-        font-size: 2rem;
+        font-size: 1.5rem;
         text-align: center;
+        color: #fa5091;
         font-family: 'Alata', sans-serif;
     }
     .text p{
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-family: 'Open Sans', sans-serif;
     }
     .poll{
-      border: 1px solid #3C5580;
-      margin: 20px;
-      padding: 10px;
-      width:50%;
-      height: 90%;
+      padding: 5px;
+      width:40%;
+      height: 100%;
 
     }
     
-    @media only screen and (max-width: 1400px){
-      .main {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-size: 1rem;
-      }
-      main h1{
-        font-size: 2rem;
-      }
-      .text p{
-        0.7rem;
-      }
+    // @media only screen and (max-width: 1024px){
+    //   .main {
+    //   display: flex;
+    //   flex-direction: column;
+    //   justify-content: center;
+    //   align-items: center;
+    //   font-size: 1rem;
+    //   }
+    //   main h1{
+    //     font-size: 5rem;
+    //   }
+    //   .text p{
+    //     0.7rem;
+    //   }
 
-    }
+    // }
     `}</style>
   </Layout>
 )};
@@ -122,7 +125,7 @@ Home.getInitialProps = async function(props) {
   const result = await axios.get(`${baseUrl}polls/questions/`);
   const pollData = await result.data;
   return {
-      polls:pollData,
+      polls:pollData.slice(0,4),
   }
 }
 

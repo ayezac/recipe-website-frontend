@@ -44,47 +44,52 @@ const SignUp = () => {
     return(
         <Layout>
             <div className="container">
-            <h3>Sign Up Here</h3>
+            <div>
+                <h3>Sign Up Here</h3>
+            </div>
             <form className="form-group">
-            <label htmlFor="first-name">First Name</label>
-                <input 
-                    type="text" 
-                    className="form-control" 
-                    id="first-name"
-                    onChange={(e)=>setFirstName(e.target.value)}/>
-            <label htmlFor="last-name">Last name</label>
-                <input 
-                    type="text" 
-                    className="form-control" 
-                    id="last-name"
-                    onChange={(e)=>setLastName(e.target.value)}/>
-            <label htmlFor="email">Email</label>
-                <input 
-                    type="email" 
-                    className="form-control" 
-                    id="email"
-                    onChange={(e)=>setEmail(e.target.value)}/>
-            <label htmlFor="username">Username</label>
-                <input 
-                    type="text" 
-                    className="form-control" 
-                    id="username"
-                    onChange={(e)=>setUserName(e.target.value)}/>
-                <label htmlFor="password">Password</label>
-                <input 
-                    type="password" 
-                    className="form-control"
-                    id="password"
-                    onChange={(e)=> setPassword(e.target.value)}/>
-                <button className="btn btn-primary" onClick={handleSignUp}>Sign Up</button>
+                <label htmlFor="first-name">First Name</label>
+                    <input 
+                        type="text" 
+                        className="form-control" 
+                        id="first-name"
+                        onChange={(e)=>setFirstName(e.target.value)}/>
+                <label htmlFor="last-name">Last name</label>
+                    <input 
+                        type="text" 
+                        className="form-control" 
+                        id="last-name"
+                        onChange={(e)=>setLastName(e.target.value)}/>
+                <label htmlFor="email">Email</label>
+                    <input 
+                        type="email" 
+                        className="form-control" 
+                        id="email"
+                        onChange={(e)=>setEmail(e.target.value)}/>
+                <label htmlFor="username">Username</label>
+                    <input 
+                        type="text" 
+                        className="form-control" 
+                        id="username"
+                        onChange={(e)=>setUserName(e.target.value)}/>
+                    <label htmlFor="password">Password</label>
+                    <input 
+                        type="password" 
+                        className="form-control"
+                        id="password"
+                        onChange={(e)=> setPassword(e.target.value)}/>
+                    <button className="btn btn-primary" onClick={handleSignUp}>Sign Up</button>
 
             </form>
             </div>
             <style jsx>{`
                 .container{
                     width: 500px;
+                    height: 700px;
+                    display: flex;
+                    flex-direction: column;
                 }
-                h3{
+                div h3{
                     text-align: center;
                 }
                 .btn{

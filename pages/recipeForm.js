@@ -148,9 +148,12 @@ const RecipeForm = () => {
                    width: 70%;
                    margin: auto;
                    text-align: center;
+                   color: #fa5091;
                 }
                 .btn{
                    margin: 20px;
+                   background-color: #fa5091;
+                   border: 1px solid #fa5091;
                 }
                 .form-inline{
                     width:800px;

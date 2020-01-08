@@ -32,18 +32,10 @@ const Login =(props)=>{
             </div>
             <style jsx>{`
                 .container{
-                    width: 30%;
-                    position: absolute;
-                    left: 10%;
-                    right: 10%;
-                    top: 20%;
-                    z-index: 1;
-                    width: 500px;
-                    height: 300px;
-                    background-color: black;
-                    color: white;
+                    color: #db125f;
                     border-radius: 20px;
-                  
+                    margin: auto;
+                    text-align: center;
                 }
                
                 h3{
@@ -55,7 +47,12 @@ const Login =(props)=>{
                     width: 400px;
                 }
                 .btn{
-                    margin-top: 10px;
+                    margin-top: 30px;
+                    width: 150px;
+                    border-radius: 20px;
+                    background-color: #db125f;
+                    border: 1px solid #db125f;
+                
                 }
             `}</style>
 

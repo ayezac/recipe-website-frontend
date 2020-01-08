@@ -18,7 +18,6 @@ const Poll = (props) => {
                 />
             </Head>
             <main id="container">
-                <h1>Poll</h1>
                 <form>
                     <ul className="list-group">
                         {props.polls.map(poll =>
@@ -37,29 +36,25 @@ const Poll = (props) => {
    #container{
         width:90%;
         margin: auto;
+        padding-top: 20px;
     }
-    h1 {
-        background-color: #3C5580;
-        color: white;
-        font-size: 1.8rem;
-        text-align: center;
-        padding: 20px;
-        font-family: 'Alata', sans-serif;
-    }
+  
     .questions{
         list-style: none;
         text-align: center;
-        font-size: 1.5rem;
-        margin-bottom: 30px;
-        border-bottom: 2px solid #3C5580;
-        padding-bottom: 40px;
+        font-size: 1rem;
+        border: 1px solid #db125f;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
         font-family: 'Open Sans', sans-serif;
-
     }
    li a{
        text-decoration: none;
-       color:#3C5580;
-       font-size: 1.1rem;
+       color: black;
+       font-size: 1rem;
+   }
+   li a:hover{
+    color: #fc0384;
    }
     input[type="radio"] {
         width: 1.5rem;

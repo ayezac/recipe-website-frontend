@@ -14,12 +14,18 @@ const LoginMessage = () => {
                     crossOrigin="anonymous"
                 />
             </Head>
+            <div className="alert-container">
             <div className="alert alert-warning" role="alert">
             <strong> You need to be logged in to add a recipe. </strong>
             <br/><Link href="/login"><a>Login here</a></Link> 
             </div>
+            </div>
             <style jsx>{`
-              
+              .alert-container{
+                  width: 400px;
+                  margin: auto;
+                  text-align: center;
+              }
             `}</style>
         </React.Fragment>
     )

@@ -28,7 +28,7 @@ const Question = (props) => {
         if(response.status===200){
             console.log(response)
             Router.push({
-                pathname: '/results'
+                pathname: '/pollresults'
             })}
         else{
             console.log(response.error)
@@ -42,19 +42,19 @@ const Question = (props) => {
                 <link href="https://fonts.googleapis.com/css?family=Alata|Open+Sans&display=swap" rel="stylesheet"/>
             </Head>
             <main>
-           <h2>{props.polls.question_text}</h2>
+                <h2>{props.polls.question_text}</h2>
                 {props.polls.choices.map(choice=>
-                 <label key={choice.id}> 
-                    <input 
-                        type="radio"
-                        name="choices"
-                        value={choice.id}
-                        onChange={handleInputChange}
-                    />
-                     <p>{choice.choice_text}</p>
-                     </label>
+                    <label key={choice.id}> 
+                        <input 
+                            type="radio"
+                            name="choices"
+                            value={choice.id}
+                            onChange={handleInputChange}
+                        />
+                        <p>{choice.choice_text}</p>
+                        </label>
                      )}
-                    <button onClick={handleSubmit}>Submit</button>
+                    <button className="btn" onClick={handleSubmit}>Submit</button>
             </main>
               
            <style jsx>{`
@@ -63,6 +63,7 @@ const Question = (props) => {
                text-align: center;
                font-family: 'Alata', sans-serif;
                font-size: 2rem;
+               color: #db125f;
             }
             main{
                 display: flex;
@@ -74,33 +75,34 @@ const Question = (props) => {
             main label {
                 display: flex;
                 flex-direction: row;
-                border: 1px solid #3C5580;
+                border: 1px solid #db125f;
+                color: #db125f;
                 padding-top: 20px;
                 padding-left: 20px;
                 width: 20vw;
                 margin: 10px;
                 font-family: 'Open Sans', sans-serif;
-                font-size: 1.2rem;
+                font-size: 1rem;
                 
             }
             input[type="radio"] {
                 width: 1.8rem;
                 height: 1.8rem;
               }
-              label p{
-                  position: relative;
-                  bottom: 15px;
-                  left: 20px;
-              }
-    
-              button{
+           
+             .btn{
                   width: 170px;
-                  height: 50px;
+                  height: 40px;
                   text-align: center;
                   margin-top: 30px;
+                  color:#db125f;
+                  border: 2px solid #db125f;
+                  background-color: white;
+                  font-size: 1rem;
+              }
+              .btn:hover{
+                  background-color: #db125f;
                   color: white;
-                  background-color: #3C5580;
-                  font-size: 1.2rem;
               }
               #results {
                   position: relative;

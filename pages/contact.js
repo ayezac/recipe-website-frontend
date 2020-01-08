@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useState} from 'react'
 import Layout from '../components/Layout';
 import axios from 'axios'
 import Head from 'next/head'
@@ -95,7 +95,7 @@ const Contact = () => {
                     <textarea 
                       id="message" 
                       placeholder="Type your message here" 
-                      rows="10" 
+                      rows="8" 
                       onChange={(e=>setMessage(e.target.value))}>
                       </textarea>
                     <div className="radio-button-container">
@@ -139,12 +139,12 @@ const Contact = () => {
     margin: auto;
     padding: 40px;
     font-family: 'Noto Sans JP', sans-serif;
-    background-color:#3C5580;
-    color: white;
+    border: 1px solid #f52c79;
+    color: #f52c79;
     font-family: 'Open Sans', sans-serif;
 }
 header h1{
-    color: #3C5580;
+    color: #f52c79;
     font-size: 2.3rem;
     text-align: center;
     font-family: 'Alata', sans-serif;
@@ -152,39 +152,54 @@ header h1{
 
 .form-control{
   margin: 10px;
+  color:#f52c79;
+  border: 1px solid #f52c79;
 }
-#form select{
-    margin: 10px;
+::placeholder{
+  color:#f52c79;
 }
-
 #form textarea{
     font-size: 16px;
     width: 100%;
     margin: 10px;
+    color:#f52c79;
+    border: 1px solid #f52c79;
+    padding: 10px;
 }
 #form label{
   margin: 10px;
+  color: #f52c79;
 }
 p{
   margin: 10px;
   font-size: 1.1rem;
+  color: #f52c79;
 }
 button{
-    background-color: white;
-    color: black;
+    background-color: #f52c79;
+    color: white;
     margin: auto;
     position: relative;
     top: 20px;
+    border: #f52c79;;
 }
-
-input[type="radio"]{
-  width: 1.4rem;
-  height: 1.4rem;
+.custom-select{
+  border: 1px solid #f52c79;
+  background-color: #f52c79;
+  color: white;
+  margin: 10px;
+}
+ select option{
+  background-color: #f52c79;
+  color: white;
+ }
+.custom-control-input{
+  width: 2rem;
+  height: 2rem;
   position: relative;
-  padding-right: 80px;
+  padding-right: 100px;
 }
 .radio-button-container{
-  border: 1px solid white;\margin: 10px;
   width: 100%;
 }
 .error{

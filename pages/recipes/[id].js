@@ -19,13 +19,14 @@ const RecipeDetail = (props) => {
             <dt>Date added: {moment(props.recipe.pub_date).format('YYYY-MM-DD')}</dt>
             <dt>Author: {props.recipe.author.username}</dt>
         </dl>
-            <div className="method">
+            <div className="recipe-container">
+                <div className="ingredients">
                 <h3>Ingredients</h3>
-                <table className="table table-bordered">
-                    <thead className="thead-light">
+                <table>
+                    <thead>
                         <tr>
-                            <th>Name of Ingredient</th>
-                            <th>Quantity</th>
+                            <th><strong>Name of Ingredient</strong></th>
+                            <th><strong>Quantity</strong></th>
                         </tr>
                     </thead>
                     {props.recipe.ingredients.map(ingredient =>
@@ -37,10 +38,13 @@ const RecipeDetail = (props) => {
                         </tbody>
                         )}
                 </table>
+                </div>
                 
                     <br/>
+                <div className="method">
                 <h3>Method:</h3>
                 <p>{props.recipe.method}</p>
+                </div>
             </div>
             </article>
  
@@ -53,17 +57,41 @@ const RecipeDetail = (props) => {
                         align-items: center;
                         font-family: 'Open Sans', sans-serif;
                     }
-                    .table{
-                        width: 400px;
+                    table{
+                        width: 300px;
                         margin: auto;
+                        border: 1px solid #fa5091;
+                        font-size: 0.9rem;
+                    }
+                    tr{
+                        border: 1px solid #fa5091;
+                    }
+                    td{
+                        padding: 5px;
+                        border: 1px solid #fa5091;
+                    }
+                    th{
+                        color: #db125f;
+                        padding: 10px;
+                        font-size: 1rem;
                     }
                 
-                    .method{
+                    .recipe-container{
                         text-align: center;
-                        width: 70%;
+                        width: 80%;
+                        display: flex;
+                        flex-direction:row;
+                    }
+                    .method{
+                        margin-left: 100px;
                     }
                     h1{
                         font-size: 2rem;
+                        color:#db125f;
+                        text-shadow: -1px 1px #e00472, 0 1px #e00472, 1px 0 #e00472, 0 -1px #e00472;
+                    }
+                    h3{
+                        color: #db125f;
                     }
                     dl{
                         font-size: 0.8rem;
