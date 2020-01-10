@@ -25,7 +25,7 @@ const layoutStyle = {
         />
       </Head>
       <Nav/>
-      <body>
+      <main>
         <div style={layoutStyle}>
         {props.children}
          
@@ -38,7 +38,7 @@ const layoutStyle = {
         </footer>
     <style jsx>{ `
 
-        body { 
+        main { 
           height: 100vh;
           margin: 0;
           padding: 10px;
@@ -63,7 +63,7 @@ const layoutStyle = {
       color: white;
     }
       `}</style>
-         </body>
+         </main>
         </React.Fragment>
      
         
