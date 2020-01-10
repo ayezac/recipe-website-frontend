@@ -27,33 +27,40 @@ const Nav = () => {
         <link href="https://fonts.googleapis.com/css?family=Alata&display=swap" rel="stylesheet" />
       </Head>
       <ul>
+          <li className="nav-link">
           <Link href="/">
             <a>Home</a>
           </Link>
-          <div>
-          <button onClick={()=>setModalOpen(true)}>Recipes</button>
-          {isModalOpen &&
-          <RecipeList ref={recipeModuleRef}  />}
-          </div>
-          {!token &&
-          <span>
-            <Link href='/login'>
-              <a>Login/</a>
-            </Link>
-              <Link href="/signup">
-              <a>Sign Up</a>
-            </Link>
-          </span>
-          } 
-          <div>
+          </li>
           {token &&
-           <button onClick={()=>setProfileDropdown(true)}>{username}</button>
-          }  
-          {profileDropdown &&
-          <ProfileDropdown ref={profileModuleRef} />
+            <div className="nav-link">
+              <button onClick={()=>setModalOpen(true)}>Recipes</button>
+              {isModalOpen && 
+              <RecipeList ref={recipeModuleRef}  />}
+            </div>
           }
-          </div>
-    
+          {!token &&
+            <li className="nav-link" id="login">
+              <Link href='/login'>
+                <a>Login/</a>
+              </Link>
+                <Link href="/signup">
+                <a>Sign Up</a>
+              </Link>
+            </li>
+          } 
+              {token &&
+              <div>
+                <button 
+                  className="nav-link"
+                  onClick={()=>setProfileDropdown(true)}>
+                    {username}
+                </button>
+              {profileDropdown &&
+                <ProfileDropdown ref={profileModuleRef} />
+              }
+              </div>
+              }
       </ul>
       </nav>
     
@@ -65,16 +72,22 @@ const Nav = () => {
         font-family: 'Alata', sans-serif;
         height: 50px;
         border-bottom: 1px solid  #e00472;
+        
+      }
+      .nav-link{
+        width: 200px;
+        text-align: center;
       }
       ul {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: flex-start;
         list-style: none;
-        padding: 15px;
         width: 98%;
         margin: auto;
+        postion: relative;
+        bottom: 10px;
       }
 
       a {
@@ -102,6 +115,7 @@ const Nav = () => {
         border: none;
         cursor: pointer;
       }
+  
    
     `}</style>
   </>
