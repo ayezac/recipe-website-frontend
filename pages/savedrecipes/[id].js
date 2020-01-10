@@ -1,65 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Layout from '../../components/Layout';
 import Head from 'next/head';
 import axios from 'axios';
 import moment from 'moment';
-import Cookies from 'js-cookie';
 import {baseUrl} from '../../components/Services';
 
 const RecipeDetail = (props) => {
-    const [isSaved, setIsSaved] = useState(false)
-    const token = Cookies.get('token')
-
-    const handleClick = async(e) => {
-        e.preventDefault()
-        const data = {
-            recipe: props.recipe.id,
-            is_saved: true
-        }
-        const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Token ${token}`
-        }
-        try{
-            const res = await axios.post(`${baseUrl}recipes/save_recipe/`,
-            data,
-            {headers}
-            )
-            if(res.status ===201){
-                console.log(res.data)
-            }
-        }
-        catch(error){
-                console.log(error)
-    }
-    setIsSaved(true)
-}
-
+    const recipe = props.savedRecipe.recipe
     return(
     <Layout>
         <Head>
-            <title>{props.recipe.title}</title>
+            <title>{recipe.title}</title>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
         </Head>
         <article>
-            <h1>{props.recipe.title}</h1>
-            {!isSaved && 
-            <button 
-                className="btn btn-primary"
-                onClick={handleClick}
-                >
-                    Save Recipe
-            </button>
-            }
-            {isSaved && 
-            <button 
-            className="btn btn-success"
-            >
-                Saved
-        </button>}
+            <h1>{recipe.title}</h1>
         <dl>
-            <dt>Date added: {moment(props.recipe.pub_date).format('YYYY-MM-DD')}</dt>
-            <dt>Author: {props.recipe.author.username}</dt>
+            <dt>Date added: {moment(recipe.pub_date).format('YYYY-MM-DD')}</dt>
+            <dt>Author: {recipe.author.username}</dt>
         </dl>
             <div className="recipe-container">
                 <div className="ingredients">
@@ -71,7 +29,7 @@ const RecipeDetail = (props) => {
                             <th><strong>Quantity</strong></th>
                         </tr>
                     </thead>
-                    {props.recipe.ingredients.map(ingredient =>
+                    {recipe.ingredients.map(ingredient =>
                         <tbody key={ingredient.id}>
                         <tr>
                             <td>{ingredient.item}</td>
@@ -85,7 +43,7 @@ const RecipeDetail = (props) => {
                     <br/>
                 <div className="method">
                 <h3>Method:</h3>
-                <p>{props.recipe.method}</p>
+                <p>{recipe.method}</p>
                 </div>
             </div>
             </article>
@@ -158,10 +116,10 @@ const RecipeDetail = (props) => {
 }
 
 RecipeDetail.getInitialProps = async function(props){
-    const result = await axios.get(`${baseUrl}recipes/${props.query.id}/`);
+    const result = await axios.get(`${baseUrl}recipes/saved_recipe/${props.query.id}/`);
     const data = await result.data
     return {
-        recipe: data,
+        savedRecipe: data,
     }
 };
 
