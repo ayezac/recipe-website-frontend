@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Layout from '../../components/Layout';
+import LoginMessage from '../../components/LoginMessage';
 import Head from 'next/head';
 import axios from 'axios';
 import moment from 'moment';
@@ -45,6 +46,7 @@ const SavedRecipeDetail = (props) => {
             <title>{props.recipe.title}</title>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
         </Head>
+        {token &&
         <article>
             <h1>{props.recipe.title}</h1>
             {!isSaved && !recipeAlreadySaved &&
@@ -109,6 +111,8 @@ const SavedRecipeDetail = (props) => {
                 </div>
             </div>
             </article>
+            }
+            {!token && <LoginMessage/>}
  
             <style jsx>
                 {`

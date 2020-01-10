@@ -16,7 +16,7 @@ const LoginMessage = () => {
             </Head>
             <div className="alert-container">
             <div className="alert alert-warning" role="alert">
-            <strong> You need to be logged in to add a recipe. </strong>
+            <strong> You must login to continue! </strong>
             <br/><Link href="/login"><a>Login here</a></Link> 
             </div>
             </div>

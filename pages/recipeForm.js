@@ -63,8 +63,6 @@ const RecipeForm = () => {
         }
     }
 
-  
-
     return(
         <Layout>
             <Head>
@@ -81,15 +79,7 @@ const RecipeForm = () => {
                         className="form-control" 
                         onChange={(e)=> setTitle(e.target.value)}/>
                 </div>
-                {/* <div className="form-group">
-                    <label htmlFor="author" className="font-weight-bold">Your name:</label>
-                    <input 
-                        type="text" 
-                        name="author" 
-                        id="author" 
-                        className="form-control"
-                        onChange={(e)=> setAuthor(e.target.value)}/>
-                </div>              */}
+                  
                 <div className="form-group">
                     <label htmlFor="method" className="font-weight-bold">Method:</label>
                     <textarea 

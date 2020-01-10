@@ -1,5 +1,6 @@
 import React from 'react';
 import Layout from '../components/Layout';
+import LoginMessage from '../components/LoginMessage';
 import Head from 'next/head';
 import axios from 'axios';
 import Link from 'next/link';
@@ -11,17 +12,19 @@ const MyRecipes = (props) => {
     const username = Cookies.get('username')
     const myrecipes = props.recipes.filter(recipe => recipe.author.username === username)
 
+    const token = Cookies.get('token')
+
     return(
         <Layout>
             <Head>
                 <title>My Recipes</title>
                 <link href="https://fonts.googleapis.com/css?family=Alata|Open+Sans&display=swap" rel="stylesheet"/>
             </Head>
+            {token &&
+            <div>
             <header>
                 <h1>My Recipes</h1>
             </header>
-                <div>
-                   
                     <ul>
                         {myrecipes.map(recipe => 
                         <li key={recipe.id}>
@@ -34,7 +37,8 @@ const MyRecipes = (props) => {
                         </li>
                     )} 
                     </ul>
-                </div>
+                </div>}
+                {!token && <LoginMessage/>}
                 <style jsx>{`
                 header{
                     font-family: 'Alata', sans-serif;

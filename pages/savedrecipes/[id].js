@@ -1,18 +1,23 @@
 import React from 'react';
 import Layout from '../../components/Layout';
+import LoginMessage from '../../components/LoginMessage';          
 import Head from 'next/head';
 import axios from 'axios';
 import moment from 'moment';
+import Cookies from 'js-cookie';
 import {baseUrl} from '../../components/Services';
 
 const RecipeDetail = (props) => {
     const recipe = props.savedRecipe.recipe
+
+    const token = Cookies.get('token')
     return(
     <Layout>
         <Head>
             <title>{recipe.title}</title>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
         </Head>
+        {token && 
         <article>
             <h1>{recipe.title}</h1>
         <dl>
@@ -47,6 +52,8 @@ const RecipeDetail = (props) => {
                 </div>
             </div>
             </article>
+            }
+            {!token && <LoginMessage/>}
  
             <style jsx>
                 {`
