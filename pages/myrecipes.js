@@ -10,6 +10,7 @@ import Cookies from 'js-cookie';
 const MyRecipes = (props) => {
     const username = Cookies.get('username')
     const myrecipes = props.recipes.filter(recipe => recipe.author.username === username)
+
     return(
         <Layout>
             <Head>

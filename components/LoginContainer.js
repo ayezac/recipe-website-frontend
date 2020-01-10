@@ -33,14 +33,14 @@ const LoginContainer = () => {
         data,
         {headers}
         )
-        if(res.status ===200){
-            Cookies.set("token", res.data.token)
-            Cookies.set("username", res.data.username)
-            Cookies.set("id", res.data.id)
-            Router.push({
-                pathname:'/'
-            })
-        }
+            if(res.status ===200){
+                Cookies.set("token", res.data.token)
+                Cookies.set("username", res.data.username)
+                Cookies.set("id", res.data.id)
+                Router.push({
+                    pathname:'/'
+                })
+            }
         }
         catch(error){
             console.log(error)
