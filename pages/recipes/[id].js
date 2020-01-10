@@ -6,15 +6,15 @@ import moment from 'moment';
 import Cookies from 'js-cookie';
 import {baseUrl} from '../../components/Services';
 
-const RecipeDetail = (props) => {
+const SavedRecipeDetail = (props) => {
     const [isSaved, setIsSaved] = useState(false)
+    const [recipeAlreadySaved, setRecipeAlreadySaved] = useState(false)
     const token = Cookies.get('token')
 
     const handleClick = async(e) => {
         e.preventDefault()
         const data = {
             recipe: props.recipe.id,
-            is_saved: true
         }
         const headers = {
             'Content-Type': 'application/json',
@@ -26,13 +26,17 @@ const RecipeDetail = (props) => {
             {headers}
             )
             if(res.status ===201){
-                console.log(res.data)
+                setIsSaved(true)
+            }
+            if(res.data.message === "UNIQUE constraint failed: recipes_savedrecipe.recipe_id, recipes_savedrecipe.user_id"){
+                setRecipeAlreadySaved(true)
             }
         }
         catch(error){
                 console.log(error)
+             
     }
-    setIsSaved(true)
+   
 }
 
     return(
@@ -43,7 +47,7 @@ const RecipeDetail = (props) => {
         </Head>
         <article>
             <h1>{props.recipe.title}</h1>
-            {!isSaved && 
+            {!isSaved && !recipeAlreadySaved &&
             <button 
                 className="btn btn-primary"
                 onClick={handleClick}
@@ -57,6 +61,22 @@ const RecipeDetail = (props) => {
             >
                 Saved
         </button>}
+        {recipeAlreadySaved &&
+                <div 
+                    className="alert alert-warning alert-dismissible fade show" 
+                    role="alert">
+                    <button 
+                        type="button" 
+                        className="close" 
+                        data-dismiss="alert" 
+                        aria-label="Close"
+                        onClick={()=>{setRecipeAlreadySaved(false)}}>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    You have already saved this recipe!
+                </div>
+            
+        }
         <dl>
             <dt>Date added: {moment(props.recipe.pub_date).format('YYYY-MM-DD')}</dt>
             <dt>Author: {props.recipe.author.username}</dt>
@@ -157,7 +177,7 @@ const RecipeDetail = (props) => {
     )
 }
 
-RecipeDetail.getInitialProps = async function(props){
+SavedRecipeDetail.getInitialProps = async function(props){
     const result = await axios.get(`${baseUrl}recipes/${props.query.id}/`);
     const data = await result.data
     return {
@@ -165,4 +185,4 @@ RecipeDetail.getInitialProps = async function(props){
     }
 };
 
-export default RecipeDetail;
+export default SavedRecipeDetail;
