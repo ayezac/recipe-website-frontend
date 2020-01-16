@@ -15,17 +15,17 @@ const RecipeForm = () => {
     const [ingredient, setIngredient] = useState('')
     const [quantity, setQuantity] = useState('')
     const [alert, setAlert] = useState(false)
+    const [errorDialog, setErrorDialog] = useState(false)
 
     const token = Cookies.get('token')
    
     const handleAddIngredient=(e)=>{
         e.preventDefault()
-        let tempIngredientList = ingredientList
         let ingredientObject = {}
         ingredientObject["item"]=ingredient
         ingredientObject["quantity"]=quantity
-        tempIngredientList.push(ingredientObject)
-        setIngredientList(tempIngredientList)
+        ingredientList.push(ingredientObject)
+        setIngredientList(ingredientList)
        setAlert(true)
        setTimeout(()=>{
            setAlert(false)
@@ -54,12 +54,13 @@ const RecipeForm = () => {
             if(response.status===201){
                 console.log('success')
                 Router.push({
-                  pathname: '/response'
+                  pathname: '/myrecipes'
                 })
               }
             }
         catch(error){
             console.log(error)
+            setErrorDialog(true)
         }
     }
 
@@ -69,7 +70,15 @@ const RecipeForm = () => {
                 <title>Add A Recipe </title>
             </Head>
             {token &&
+          
             <form>
+                {errorDialog && 
+                    <div className="alert alert-danger" role="alert">
+                        <strong>An Error Occurred! </strong> 
+                        Make sure you entered all the fields and try again.
+                    </div>
+                }
+                <div>
                 <div className="form-group">
                     <label htmlFor="recipe-title" className="font-weight-bold">Name of Recipe:</label>
                     <input 
@@ -77,7 +86,9 @@ const RecipeForm = () => {
                         name="title" 
                         id="recipe-title" 
                         className="form-control" 
+                        required
                         onChange={(e)=> setTitle(e.target.value)}/>
+                        
                 </div>
                   
                 <div className="form-group">
@@ -87,8 +98,10 @@ const RecipeForm = () => {
                         name="method" 
                         id="method" 
                         className="form-control"
+                        required
                         onChange={(e)=> setMethod(e.target.value)}/>
                 </div>
+                <div>
                 <div className="ingredients-container">
                 <p className="font-weight-bold">Add Ingredients:</p>
                 <div className="form-inline">
@@ -96,6 +109,7 @@ const RecipeForm = () => {
                         type="text" 
                         id="ingredient" 
                         placeholder="name of ingredient" 
+                        required
                         className="form-control mb-2 mr-sm-2"
                         value={ingredient}
                         onChange={(e)=>setIngredient(e.target.value)}
@@ -105,6 +119,7 @@ const RecipeForm = () => {
                         placeholder="quantity" 
                         id="quantity" 
                         className="form-control mb-2 mr-sm-2"
+                        required
                         value={quantity}
                         onChange={(e)=> setQuantity(e.target.value)}/>
                             
@@ -118,9 +133,18 @@ const RecipeForm = () => {
                             Added! 
                             </div>
                             }
-                    
+                    </div>
+                    </div>
+                    <div>
+                        <ol>
+                            {ingredientList.map((item, id) => 
+                                <li key={id} className="ingredient">
+                                    <strong>{item.item}</strong>{' '} --- {item.quantity}
+                                </li>)}
+                        </ol>
+                   
                 </div>
-            
+            </div>
                 <button 
                     onClick={handleSubmit} 
                     className="btn btn-primary mb-2">
@@ -146,15 +170,19 @@ const RecipeForm = () => {
                    border: 1px solid #fa5091;
                 }
                 .form-inline{
-                    width:800px;
+                    width:90%;
                     margin: auto;
                     text-align: center;
                 }
-                .ingredient-container{
-                    background
-                }
                 .alert{
                     display: inline-block;
+                }
+                ol{
+                    text-align: left;
+                }
+                .ingredient{
+                    color: black;
+                   
                 }
               
                 `}
