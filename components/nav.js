@@ -5,28 +5,44 @@ import RecipeList from './RecipeDropdown';
 import ProfileDropdown from './ProfileDropdown';
 import useOnClickOutside from './useOnClickOutside';
 import Cookies from 'js-cookie';
+import MobileMenuDropdown from './MobileMenuDropdown';
 
 
 const Nav = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [profileDropdown, setProfileDropdown] = useState(false)
+  const [toggleMenu, setToggleMenu] = useState(false)
+ 
   
   // Call hook passing in the ref and a function to call on outside click
   const recipeModuleRef = useRef();  
   const profileModuleRef = useRef();
+  const menuModuleRef = useRef();
 
   useOnClickOutside(recipeModuleRef, () => setModalOpen(false));
   useOnClickOutside(profileModuleRef, () => setProfileDropdown(false));
+  useOnClickOutside(menuModuleRef, () => setToggleMenu(false));
+
   const token = Cookies.get('token')
   const username = Cookies.get('username')
 
   return (
     <>
-    <nav>
       <Head>
-        <link href="https://fonts.googleapis.com/css?family=Alata&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Alata|Raleway&display=swap" 
+              rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet"/>
       </Head>
-      <ul>
+      {/* Navbar for desktop view */}
+      <nav className="navbar-desktop">
+
+      <ul className="nav-links-desktop">
+        <li className="nav-link">
+            <Link href="/">
+              <a className="nav-brand">MyRecipeBook</a>
+            </Link>
+        </li>
           <li className="nav-link">
           <Link href="/">
             <a>Home</a>
@@ -63,10 +79,28 @@ const Nav = () => {
               }
       </ul>
       </nav>
-    
+      
+      {/* Navbar for Mobile View */}
+      <nav className="navbar-mobile">
+          <div role="button" className="nav-header" onClick={()=>setToggleMenu(true)}>
+          <i className="material-icons">menu</i>
+              <Link href="/">
+                <a className="nav-brand">MyRecipeBook</a>
+              </Link>
+          </div>
+        
+          {/* display menu dropdown when menu icon clicked */}
+        {toggleMenu &&
+          <MobileMenuDropdown ref={menuModuleRef} className="menu-dropdown"/>
+            }
+            
+  </nav>
   
      
       <style jsx>{`
+      .navbar-mobile{
+        display: none;
+      }
       nav {
         width: 100%;
         font-family: 'Alata', sans-serif;
@@ -74,11 +108,19 @@ const Nav = () => {
         border-bottom: 1px solid  #e00472;
         
       }
+    
+      .nav-brand{
+        font-family: 'Raleway', sans-serif;
+        font-size: 1.2rem;
+        background-color: black;
+        color: white;
+        padding: 5px;
+      }
       .nav-link{
-        width: 200px;
+        width: 25%;
         text-align: center;
       }
-      ul {
+      .nav-links-desktop{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -97,7 +139,6 @@ const Nav = () => {
         text-align: center;
       }
       a:hover{
-        text-decoration: underline;
         color: #e00472;
       }
       button:hover{
@@ -115,7 +156,36 @@ const Nav = () => {
         border: none;
         cursor: pointer;
       }
+      @media only screen and (max-width: 700px) {
+        .navbar-desktop{
+          display: none;
+        }
+        .navbar-mobile{
+          display: block;
+          height: 80px;
+          width: 100%;
+        }
+        .nav-header{
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          padding-top: 20px;
+          width: 100%;
+        }
+      .material-icons{
+        padding-right: 10px;
+        font-size: 44px;
+      }
+      .nav-brand{
+        width: 200px;
+        font-size: 1.3rem;
+      }
+      .menu-dropdown{
+        z-index: 4;
+      }
   
+     
+      }
    
     `}</style>
   </>
