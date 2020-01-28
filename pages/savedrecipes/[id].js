@@ -7,7 +7,7 @@ import moment from 'moment';
 import Cookies from 'js-cookie';
 import {baseUrl} from '../../components/Services';
 
-const RecipeDetail = (props) => {
+const SavedRecipeDetail = (props) => {
     const recipe = props.savedRecipe.recipe
 
     const token = Cookies.get('token')
@@ -122,7 +122,7 @@ const RecipeDetail = (props) => {
     )
 }
 
-RecipeDetail.getInitialProps = async function(props){
+SavedRecipeDetail.getInitialProps = async function(props){
     const result = await axios.get(`${baseUrl}recipes/saved_recipe/${props.query.id}/`);
     const data = await result.data
     return {
@@ -130,4 +130,4 @@ RecipeDetail.getInitialProps = async function(props){
     }
 };
 
-export default RecipeDetail;
+export default SavedRecipeDetail;

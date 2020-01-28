@@ -28,7 +28,7 @@ const ProfileDropdown = React.forwardRef((props,ref) => {
                     top: 7%;
                     background-color:black;
                     padding: 10px;
-                    // z-index: 1;
+                    z-index: 1;
                     display: flex;
                     flex-direction: column;
                     overflow: hidden;
