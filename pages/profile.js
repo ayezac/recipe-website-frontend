@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout";
 import { baseUrl } from "../components/Services";
+import Poll from "../components/Poll";
 import axios from "axios";
 import Link from "next/link";
 import Cookies from "js-cookie";
@@ -22,7 +23,7 @@ const ProfilePage = props => {
         </header>
 
         <div className="card">
-          <div className="card-body">
+          <div className="card-body d-flex flex-row">
             <div className="card-text">
               <h2>Saved Recipes</h2>
 
@@ -39,6 +40,10 @@ const ProfilePage = props => {
                 ))}
               </ul>
             </div>
+            <section className="poll">
+                <h2>Fun Poll</h2>
+                <Poll polls={props.polls} />
+              </section>
           </div>
         </div>
       </div>
@@ -65,6 +70,9 @@ const ProfilePage = props => {
           border: 1px solid #6e6e6e;
           box-shadow: 5px 5px 5px #6e6e6e;
         }
+        .card-body{
+          justify-content: space-around; 
+        }
       `}</style>
     </Layout>
   );
@@ -77,10 +85,13 @@ ProfilePage.getInitialProps = async function(props) {
 
   const result = await axios.get(`${baseUrl}user/${userId}/`);
   const saved_recipes = await axios.get(`${baseUrl}recipes/saved_recipe_list/`);
+  const pollQuestions = await axios.get(`${baseUrl}polls/questions/`);
   const profileData = await result.data;
   const saved_recipes_data = await saved_recipes.data;
+  const poll_data = await pollQuestions.data;
   return {
     profile: profileData,
-    saved_recipes: saved_recipes_data
+    saved_recipes: saved_recipes_data,
+    polls: poll_data,
   };
 };

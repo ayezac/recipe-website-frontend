@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "../components/Layout";
-import Poll from "../components/Poll";
 import axios from "axios";
 import Head from "next/head";
 import { baseUrl } from "../components/Services";
@@ -21,28 +20,8 @@ const Home = props => {
             <h1>MY RECIPE BOOK</h1>
           </header>
           <figure>
-            <img src="recipe-book.gif" alt="A drawing of a recipe book" />
+            <img src="recipe-book.gif" alt="A recipe book" />
           </figure>
-        </div>
-        <div className="about-container">
-          <section className="text">
-            <h3>About</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui
-              dicta minus molestiae vel beatae natus eveniet ratione temporibus
-              aperiam harum alias officiis assumenda officia quibusdam deleniti
-              eos cupiditate dolore doloribus!
-            </p>
-            <p>
-              Ad dolore dignissimos asperiores dicta facere optio quod commodi
-              nam tempore recusandae. Rerum sed nulla eum vero expedita ex
-              delectus voluptates rem at neque quos facere sequi unde optio
-              aliquam!
-            </p>
-          </section>
-          <section className="poll">
-            <Poll polls={props.polls} />
-          </section>
         </div>
       </main>
 
@@ -67,12 +46,11 @@ const Home = props => {
           align-items: center;
           width: 100%;
         }
-
         figure {
           margin: auto;
         }
         img {
-          width: 40vw;
+          width: 30vw;
           margin: auto;
         }
         .about-container {
@@ -80,11 +58,13 @@ const Home = props => {
           flex-direction: row;
           justify-content: center;
           color: black;
-          border: 1px solid #db125f;
+          max-width: 80%;
+          margin: auto;
         }
         .text {
           padding: 10px;
           width: 40%;
+          box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
         }
         .text h3 {
           font-size: 1.5rem;
@@ -123,12 +103,5 @@ const Home = props => {
   );
 };
 
-Home.getInitialProps = async function(props) {
-  const result = await axios.get(`${baseUrl}polls/questions/`);
-  const pollData = await result.data;
-  return {
-    polls: pollData.slice(0, 4)
-  };
-};
 
 export default Home;
