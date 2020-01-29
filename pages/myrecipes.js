@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../components/Layout";
 import LoginMessage from "../components/LoginMessage";
 import Head from "next/head";
@@ -9,6 +9,7 @@ import { baseUrl } from "../components/Services";
 import Cookies from "js-cookie";
 
 const MyRecipes = props => {
+  const [deleted, setDeleted] = useState(false);
   const username = Cookies.get("username");
   const myrecipes = props.recipes.filter(
     recipe => recipe.author.username === username
@@ -36,18 +37,33 @@ const MyRecipes = props => {
                 <Link href={`/recipes/[id]`} as={`/recipes/${recipe.id}`}>
                   <a>{recipe.title}</a>
                 </Link>
-                {/* <Link 
-                            href={`/edit/[id]`}
-                            as = {`/edit/${recipe.id}`}
-                        >
-                            <a>Edit Recipe</a>
-                        </Link> */}
+                {/* Delete button and function */}
+                <button
+                  onClick={async () => {
+                    const response = await axios.delete(
+                      `${baseUrl}recipes/${recipe.id}`
+                    );
+                    if (response.status === 204) {
+                      setDeleted(true);
+                      setTimeout(() => {
+                        setDeleted(false);
+                      }, 1500);
+                      Router.push({
+                        pathname: "/myrecipes"
+                      });
+                    }
+                  }}
+                  className="btn btn-sm btn-danger delete-btn"
+                >
+                  Delete
+                </button>
               </li>
             ))}
           </ul>
         </div>
       )}
       {!token && <LoginMessage />}
+      {deleted && <div className="alert alert-success">Deleted</div>}
       <style jsx>{`
         header {
           font-family: "Alata", sans-serif;
@@ -56,7 +72,7 @@ const MyRecipes = props => {
           text-shadow: -1px 1px #e00472, 0 1px #e00472, 1px 0 #e00472,
             0 -1px #e00472;
         }
-        ul a {
+        ul li a {
           font-size: 1.3rem;
           text-decoration: none;
           color: black;
@@ -70,6 +86,11 @@ const MyRecipes = props => {
           margin: 5px;
           list-style: none;
           font-family: "Open Sans", sans-serif;
+        }
+        .alert {
+          width: 8%;
+          position: absolute;
+          left: 4%;
         }
       `}</style>
     </Layout>
