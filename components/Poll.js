@@ -17,11 +17,11 @@ const Poll = props => {
           crossOrigin="anonymous"
         />
       </Head>
-      <main id="container">
+      <main className="p-4 container">
         <form>
           <ul className="list-group">
             {props.polls.map(poll => (
-              <li className="questions list-group-item" key={poll.id}>
+              <li className="questions p-3" key={poll.id}>
                 <Link href={`/choices/[id]`} as={`/choices/${poll.id}`}>
                   <a className="display-5">{poll.question_text}</a>
                 </Link>
@@ -31,24 +31,25 @@ const Poll = props => {
         </form>
 
         <style jsx>{`
-          #container {
+          .container {
             width: 90%;
             margin: auto;
             padding-top: 20px;
+            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
           }
 
           .questions {
             list-style: none;
             text-align: center;
             font-size: 1rem;
-            border: 1px solid #db125f;
             margin-bottom: 10px;
             padding-bottom: 10px;
             font-family: "Open Sans", sans-serif;
+            border-bottom: 1px solid  #fc0384;;
           }
           li a {
             text-decoration: none;
-            color: black;
+            color:var(--font-color);
             font-size: 1rem;
           }
           li a:hover {

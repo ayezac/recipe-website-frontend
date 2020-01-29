@@ -22,7 +22,7 @@ const RecipeList = React.forwardRef((props, ref) => {
         .recipe-dropdown {
           position: relative;
           top: 7%;
-          background-color: black;
+          background-color: #8c8c89;
           padding: 10px;
           z-index: 2;
           display: flex;

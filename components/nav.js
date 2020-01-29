@@ -53,7 +53,7 @@ const Nav = () => {
           {!token && (
             <li className="nav-link" id="login">
               <Link href="/login">
-                <a>Login/</a>
+                <a>Login|</a>
               </Link>
               <Link href="/signup">
                 <a>Sign Up</a>
@@ -61,9 +61,8 @@ const Nav = () => {
             </li>
           )}
           {token && (
-            <div>
+            <div className="nav-link">
               <button
-                className="nav-link"
                 onClick={() => setProfileDropdown(true)}
               >
                 {username}
@@ -107,12 +106,13 @@ const Nav = () => {
         .nav-brand {
           font-family: "Raleway", sans-serif;
           font-size: 1.2rem;
-          background-color: black;
+          background-color: #8c8c89;
           color: white;
           padding: 5px;
         }
         .nav-link {
           text-align: center;
+          min-width: 200px;
         }
         .nav-links-desktop {
           display: flex;
@@ -121,27 +121,25 @@ const Nav = () => {
           align-items: flex-start;
           list-style: none;
           width: 98%;
-          margin: auto;
-          postion: relative;
-          bottom: 10px;
+          margin: auto; 
         }
-
         a {
-          color: black;
+          color:  var(--font-color);
           text-decoration: none;
           font-size: 16px;
           text-align: center;
         }
         a:hover {
           color: #e00472;
+          border-bottom: 3px solid #e00472;
         }
         button:hover {
-          text-decoration: underline;
+          border-bottom: 3px solid #e00472;
           color: #e00472;
         }
 
         button {
-          color: black;
+          color: #8c8c89;
           text-decoration: none;
           font-size: 16px;
           text-align: center;

@@ -48,7 +48,7 @@ const Recipes = props => {
         ul a {
           font-size: 1.3rem;
           text-decoration: none;
-          color: black;
+          color: var(--font-color);
           padding: 10px;
         }
         ul a:hover {

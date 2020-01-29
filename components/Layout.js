@@ -4,7 +4,6 @@ import Head from "next/head";
 import Link from "next/link";
 
 const layoutStyle = {
-  padding: 20,
   boxSizing: "border-box",
   width: "100%",
   minHeight: "100%"
@@ -22,9 +21,9 @@ const Layout = props => {
         />
       </Head>
       <Nav />
-      <main>
+      <main className="mt-4">
         <div style={layoutStyle}>{props.children}</div>
-        <footer>
+        <footer className="p-3">
           <p>&copy; 2019</p>
           <Link href="/contact">
             <a>Contact Us</a>
@@ -34,7 +33,6 @@ const Layout = props => {
           main {
             height: 100vh;
             margin: 0;
-            padding: 10px;
           }
 
           footer {
@@ -44,17 +42,15 @@ const Layout = props => {
             display: flex;
             flex-direction: row;
             justify-content: space-around;
-            height: 40px;
-            width: 98%;
-            background-color: black;
-            color: white;
+            height: 60px;
+            width: 100vw;
+            border-top: 1px solid black;
             padding: 10px;
-            position: relative;
-            left: 1.5%;
           }
           footer a {
-            color: white;
+            color: black;
           }
+          --font-color: #70706e;
         `}</style>
       </main>
     </React.Fragment>

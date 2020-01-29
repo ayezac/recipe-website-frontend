@@ -26,7 +26,7 @@ const ProfileDropdown = React.forwardRef((props,ref) => {
                 .profile-dropdown{
                     position: relative;
                     top: 7%;
-                    background-color:black;
+                    background-color:#8c8c89;
                     padding: 10px;
                     z-index: 1;
                     display: flex;

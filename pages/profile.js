@@ -64,7 +64,7 @@ const ProfilePage = props => {
           color: #e00472;
         }
         ul li a {
-          color: black;
+          color: var(--font-color);
         }
         .card {
           border: 1px solid #6e6e6e;
