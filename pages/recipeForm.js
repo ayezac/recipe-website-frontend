@@ -3,9 +3,9 @@ import Layout from "../components/Layout";
 import Head from "next/head";
 import axios from "axios";
 import Router from "next/router";
-import LoginMessage from "../components/LoginMessage";
+import LoginMessage from "../components/Login/LoginMessage";
 import Cookies from "js-cookie";
-import { baseUrl } from "../components/Services";
+import { baseUrl } from "../services/baseUrl";
 
 const RecipeForm = () => {
   const [title, setTitle] = useState("");
