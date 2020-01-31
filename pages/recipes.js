@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import Layout from "../components/Layout";
 import LoginMessage from "../components/LoginMessage";
 import Head from "next/head";
@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { baseUrl } from "../components/Services";
 
 const Recipes = props => {
+
   const token = Cookies.get("token");
 
   return (
@@ -25,12 +26,13 @@ const Recipes = props => {
             <h1>All Recipes</h1>
           </header>
 
-          <ul>
+          <ul className="d-flex flex-row flex-wrap justify-content-center">
             {props.recipes.map(recipe => (
-              <li key={recipe.id}>
+              <li className="card" key={recipe.id}>
                 <Link href={`/recipes/[id]`} as={`/recipes/${recipe.id}`}>
                   <a>{recipe.title}</a>
                 </Link>
+                <img className="flex-shrink-0 flex-grow-0" src={recipe.image} alt="recipe image"/>
               </li>
             ))}
           </ul>
@@ -50,6 +52,7 @@ const Recipes = props => {
           text-decoration: none;
           color: var(--font-color);
           padding: 10px;
+          text-align: center;
         }
         ul a:hover {
           color: #e00472;
@@ -60,6 +63,14 @@ const Recipes = props => {
           list-style: none;
           font-family: "Open Sans", sans-serif;
         }
+        .card{
+          width: 350px;
+        }
+        img {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
       `}</style>
     </Layout>
   );
@@ -68,6 +79,7 @@ const Recipes = props => {
 Recipes.getInitialProps = async function(props) {
   const result = await axios.get(`${baseUrl}recipes/recipe_list/`);
   const data = await result.data;
+  console.log(data);
   return {
     recipes: data
   };

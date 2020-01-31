@@ -31,12 +31,13 @@ const MyRecipes = props => {
           <header>
             <h1>My Recipes</h1>
           </header>
-          <ul>
+          <ul className="d-flex flex-row justify-content-center">
             {myrecipes.map(recipe => (
-              <li key={recipe.id}>
+              <li className="card" key={recipe.id}>
                 <Link href={`/recipes/[id]`} as={`/recipes/${recipe.id}`}>
                   <a>{recipe.title}</a>
                 </Link>
+                <img src={recipe.image} alt="recipe image"/>
                 {/* Delete button and function */}
                 <button
                   onClick={async () => {
@@ -57,6 +58,13 @@ const MyRecipes = props => {
                 >
                   Delete
                 </button>
+
+                {/* <Link 
+                            href={`/edit/[id]`}
+                            as = {`/edit/${recipe.id}`}
+                        >
+                            <a>Edit Recipe</a>
+                        </Link> */}
               </li>
             ))}
           </ul>
@@ -77,6 +85,7 @@ const MyRecipes = props => {
           text-decoration: none;
           color: black;
           padding: 10px;
+          margin: auto;
         }
         ul a:hover {
           color: #e00472;
@@ -91,6 +100,14 @@ const MyRecipes = props => {
           width: 8%;
           position: absolute;
           left: 4%;
+        }
+        .card{
+          width: 300px;
+        }
+        img {
+          display: block;
+          width: 100%;
+          height: auto;
         }
       `}</style>
     </Layout>

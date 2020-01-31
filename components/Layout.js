@@ -21,14 +21,15 @@ const Layout = props => {
         />
       </Head>
       <Nav />
-      <main className="mt-4">
+      <main className="mt-4 mb-4">
         <div style={layoutStyle}>{props.children}</div>
-        <footer className="p-3">
+        <footer className="pt-3 mt-5">
           <p>&copy; 2019</p>
           <Link href="/contact">
             <a>Contact Us</a>
           </Link>
         </footer>
+        </main>
         <style jsx>{`
           main {
             height: 100vh;
@@ -42,7 +43,7 @@ const Layout = props => {
             display: flex;
             flex-direction: row;
             justify-content: space-around;
-            height: 60px;
+            height: 40px;
             width: 100vw;
             border-top: 1px solid black;
             padding: 10px;
@@ -52,7 +53,7 @@ const Layout = props => {
           }
           --font-color: #70706e;
         `}</style>
-      </main>
+      
     </React.Fragment>
   );
 };
