@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
 import Head from "next/head";
-import RecipeList from "./RecipeDropdown";
-import ProfileDropdown from "./ProfileDropdown";
+import RecipeList from "./Dropdowns/RecipeDropdown";
+import ProfileDropdown from "./Dropdowns/ProfileDropdown";
 import useOnClickOutside from "./useOnClickOutside";
 import Cookies from "js-cookie";
-import MobileMenuDropdown from "./MobileMenuDropdown";
+import MobileMenuDropdown from "./Dropdowns/MobileMenuDropdown";
 
 const Nav = () => {
   const [isModalOpen, setModalOpen] = useState(false);

@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import Head from "next/head";
 import axios from "axios";
 import Link from "next/link";
-import { baseUrl } from "../components/Services";
+import { baseUrl } from "../services/baseUrl";
 
 const FindRecipes = () => {
   const [searchTerm, setSearchTerm] = useState("");

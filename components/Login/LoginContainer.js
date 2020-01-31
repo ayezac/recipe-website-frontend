@@ -3,7 +3,7 @@ import Login from "./Login";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Router from "next/router";
-import { baseUrl } from "./Services";
+import { baseUrl } from "../../services/baseUrl";
 import LoginError from "./LoginErrorMessage";
 
 const LoginContainer = () => {

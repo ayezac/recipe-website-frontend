@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Layout from "../components/Layout";
 import Router from "next/router";
 import axios from "axios";
-import { baseUrl } from "../components/Services";
+import { baseUrl } from "../services/baseUrl";
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");

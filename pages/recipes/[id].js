@@ -5,7 +5,7 @@ import Head from "next/head";
 import axios from "axios";
 import moment from "moment";
 import Cookies from "js-cookie";
-import { baseUrl } from "../../components/Services";
+import { baseUrl } from "../../services/baseUrl";
 
 const RecipeDetail = props => {
   const [isSaved, setIsSaved] = useState(false);

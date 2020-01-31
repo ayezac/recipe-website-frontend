@@ -3,7 +3,7 @@ import axios from "axios";
 import Router from "next/router";
 import Head from "next/head";
 import Layout from "../../components/Layout";
-import { baseUrl } from "../../components/Services";
+import { baseUrl } from "../../services/baseUrl";
 
 const Question = props => {
   const [choiceChosen, setChoiceChosen] = useState(0);

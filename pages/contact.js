@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import axios from "axios";
 import Head from "next/head";
 import Router from "next/router";
-import { baseUrl } from "../components/Services";
+import { baseUrl } from "../services/baseUrl";
 
 const emailRegex = new RegExp(
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/

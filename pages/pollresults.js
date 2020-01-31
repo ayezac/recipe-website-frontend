@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import Layout from "../components/Layout";
 import Head from "next/head";
-import { baseUrl } from "../components/Services";
+import { baseUrl } from "../services/baseUrl";
 
 const Results = props => {
   return (

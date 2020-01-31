@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
-import { baseUrl } from "../components/Services";
+import { baseUrl } from "../services/baseUrl";
 import Poll from "../components/Poll";
 import axios from "axios";
 import Link from "next/link";
@@ -22,9 +22,9 @@ const ProfilePage = props => {
           <p className="user-info">{props.profile.email}</p>
         </header>
 
-        <div className="card">
-          <div className="card-body d-flex flex-row">
-            <div className="card-text">
+        <div className="d-flex flex-row justify-content-md-around">
+          <div className="card">
+            <div className="card-body">
               <h2>Saved Recipes</h2>
 
               <ul>
@@ -40,11 +40,14 @@ const ProfilePage = props => {
                 ))}
               </ul>
             </div>
-            <section className="poll">
+          </div>
+       
+        <div className="card">
+          <div className="card-body">
                 <h2>Fun Poll</h2>
                 <Poll polls={props.polls} />
-              </section>
           </div>
+        </div>
         </div>
       </div>
       <style jsx>{`
@@ -67,12 +70,10 @@ const ProfilePage = props => {
           color: var(--font-color);
         }
         .card {
-          border: 1px solid #6e6e6e;
-          box-shadow: 5px 5px 5px #6e6e6e;
+          height: 100%;
+          width: 48%;
         }
-        .card-body{
-          justify-content: space-around; 
-        }
+   
       `}</style>
     </Layout>
   );
