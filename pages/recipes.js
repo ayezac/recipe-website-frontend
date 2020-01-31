@@ -1,6 +1,6 @@
 import React, { useState} from "react";
 import Layout from "../components/Layout";
-import LoginMessage from "../components/Login/LoginMessage";
+import LoginMessage from "../components/Login/Login/LoginMessage";
 import Head from "next/head";
 import axios from "axios";
 import Link from "next/link";

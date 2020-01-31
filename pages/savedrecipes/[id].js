@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../../components/Layout';
-import LoginMessage from '../../components/LoginMessage';          
+import LoginMessage from '../../components/Login/LoginMessage';          
 import Head from 'next/head';
 import axios from 'axios';
 import moment from 'moment';
