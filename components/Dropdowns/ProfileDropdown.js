@@ -17,7 +17,7 @@ const ProfileDropdown = React.forwardRef((props,ref) => {
         <React.Fragment>
             <div className="profile-dropdown" ref={ref}>
                 <Link href="/profile" as="/profile-page">
-                    <a>View Profile</a>
+                    <a>My Page</a>
                 </Link>
                 <button onClick={handleLogout}>Logout</button>
             
