@@ -9,6 +9,7 @@ import { baseUrl } from "../services/baseUrl";
 
 const RecipeForm = () => {
   const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
   const [method, setMethod] = useState("");
   const [ingredientList, setIngredientList] = useState([]);
   const [ingredient, setIngredient] = useState("");
@@ -36,11 +37,21 @@ const RecipeForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
+    const toBase64 = image =>
+      new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+      });
+
     const data = {
       title: title,
+      image: await toBase64(image),
       ingredients: ingredientList,
       method: method
     };
+
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Token ${token}`
@@ -50,7 +61,6 @@ const RecipeForm = () => {
         headers
       });
       if (response.status === 201) {
-        console.log("success");
         Router.push({
           pathname: "/myrecipes"
         });
@@ -88,6 +98,22 @@ const RecipeForm = () => {
                 onChange={e => setTitle(e.target.value)}
               />
             </div>
+            <div className="form-group">
+              <label htmlFor="recipe-image" className="font-weight-bold">
+                Image for Recipe
+              </label>
+              <input
+                type="file"
+                name="recipe-image"
+                accept="file_extension|image/*"
+                className="form-control"
+                placeholder="Add an image for your recipe"
+                onChange={e => {
+                  setImage(e.target.files[0]);
+                }}
+              />
+            </div>
+            {image && <img src={image} alt="uploaded image" />}
 
             <div className="form-group">
               <label htmlFor="method" className="font-weight-bold">
