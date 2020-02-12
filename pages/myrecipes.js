@@ -37,7 +37,16 @@ const MyRecipes = props => {
                 <Link href={`/recipes/[id]`} as={`/recipes/${recipe.id}`}>
                   <a>{recipe.title}</a>
                 </Link>
-                <img src={recipe.image} alt="recipe image"/>
+                <Link href={`/recipes/[id]`} as={`/recipes/${recipe.id}`}>
+                  <img src={recipe.image} alt="recipe image" />
+                </Link>
+                {/* Edit button and function */}
+                <Link href={`/edit/[id]`} as={`/edit/${recipe.id}`}>
+                  <button className="btn btn-sm btn-info buttons mt-2 mb-2">
+                    Edit Recipe
+                  </button>
+                </Link>
+
                 {/* Delete button and function */}
                 <button
                   onClick={async () => {
@@ -54,17 +63,10 @@ const MyRecipes = props => {
                       });
                     }
                   }}
-                  className="btn btn-sm btn-danger delete-btn"
+                  className="btn btn-sm btn-danger buttons"
                 >
                   Delete
                 </button>
-
-                {/* <Link 
-                            href={`/edit/[id]`}
-                            as = {`/edit/${recipe.id}`}
-                        >
-                            <a>Edit Recipe</a>
-                        </Link> */}
               </li>
             ))}
           </ul>
@@ -101,13 +103,19 @@ const MyRecipes = props => {
           position: absolute;
           left: 4%;
         }
-        .card{
+        .card {
           width: 300px;
         }
         img {
           display: block;
           width: 100%;
           height: auto;
+        }
+        .buttons {
+          height: 50px;
+          width: 100%;
+          color: white;
+          font-size: 0.875rem;
         }
       `}</style>
     </Layout>

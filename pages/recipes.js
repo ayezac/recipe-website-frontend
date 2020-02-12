@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import Layout from "../components/Layout";
 import LoginMessage from "../components/Login/LoginMessage";
 import Head from "next/head";
@@ -8,7 +8,6 @@ import Cookies from "js-cookie";
 import { baseUrl } from "../services/baseUrl";
 
 const Recipes = props => {
-
   const token = Cookies.get("token");
 
   return (
@@ -32,7 +31,13 @@ const Recipes = props => {
                 <Link href={`/recipes/[id]`} as={`/recipes/${recipe.id}`}>
                   <a>{recipe.title}</a>
                 </Link>
-                <img className="flex-shrink-0 flex-grow-0" src={recipe.image} alt="recipe image"/>
+                <Link href={`/recipes/[id]`} as={`/recipes/${recipe.id}`}>
+                  <img
+                    className="flex-shrink-0 flex-grow-0"
+                    src={recipe.image}
+                    alt="recipe image"
+                  />
+                </Link>
               </li>
             ))}
           </ul>
@@ -63,8 +68,8 @@ const Recipes = props => {
           list-style: none;
           font-family: "Open Sans", sans-serif;
         }
-        .card{
-          width: 350px;
+        .card {
+          width: 300px;
         }
         img {
           display: block;
