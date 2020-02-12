@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
 import LoginMessage from "../../components/Login/LoginMessage";
 import Head from "next/head";
@@ -10,7 +10,9 @@ import { baseUrl } from "../../services/baseUrl";
 const RecipeDetail = props => {
   const [isSaved, setIsSaved] = useState(false);
   const [recipeAlreadySaved, setRecipeAlreadySaved] = useState(false);
+  const [myRecipe, setMyRecipe] = useState(false)
   const token = Cookies.get("token");
+  const username = Cookies.get("username")
 
   const handleClick = async e => {
     e.preventDefault();
@@ -39,6 +41,12 @@ const RecipeDetail = props => {
     }
   };
 
+  useEffect(()=>{
+    if (props.recipe.author.username === username){
+      setMyRecipe(true)
+    }
+  }, [])
+
   return (
     <Layout>
       <Head>
@@ -51,7 +59,7 @@ const RecipeDetail = props => {
       {token && (
         <article>
           <h1>{props.recipe.title}</h1>
-          {!isSaved && !recipeAlreadySaved && (
+          {!isSaved && !recipeAlreadySaved && !myRecipe && (
             <button className="btn btn-primary" onClick={handleClick}>
               Save Recipe
             </button>
